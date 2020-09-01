@@ -50,7 +50,7 @@ namespace EmployeeServer.Controllers
 
         [HttpPost]
         [Route("api/UpdateHRsForEmployee/{employeeNumber}")]
-        public IActionResult UpdateHRsForEmployee(List<HoursReportRequest> updatedHRs, int employeeNumber)
+        public IActionResult UpdateHRsForEmployee([FromBody] List<HoursReportRequest> updatedHRs, int employeeNumber)
         {
             List<HoursReportDTO> hrs=new List<HoursReportDTO>();
             foreach(var hr in updatedHRs)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace DTOMapper
                 employeeNumber = hr.EmployeeNumber,
                 Id = hr.Id,
                 timeEnd = hr.TimeEnd,
-                timeStart = hr.TimeStart
+                timeStart =hr.TimeStart
             };
         }
         public static List<HoursReportDTO> DALsToDTOs(List<HoursReport> hrs)
@@ -51,7 +52,7 @@ namespace DTOMapper
             return new HoursReportDTO
             {
                 comment = hr.comment,
-                date = hr.date,
+                date = DateTime.ParseExact(hr.date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 dayReportType = int.Parse(hr.dayReportType),
                 employeeNumber = hr.employeeNumber,
                 Id = hr.Id,

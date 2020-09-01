@@ -62,7 +62,7 @@ namespace EmployeeServer.Controllers
             return Ok(EmployeeBLL.GetEmployeeById(empNumber));
         }
 
-        [HttpPost]
+       
         [Route("api/AddEmployee")]
         public IActionResult AddEmployee([FromBody] EmployeeRequest newEmp)
         {
@@ -70,6 +70,13 @@ namespace EmployeeServer.Controllers
             var emp = EmployeeBLL.AddEmployee(empDTO);
             var upOk =  UploadedProfileBLL.AddUploadedProfile(emp);
             return Ok(emp);
+        }
+
+        [HttpPost]
+        [Route("api/RemoveEmployee/{empNumber}")]
+        public IActionResult RemoveEmployee(EmployeeDTO updatedEmp, int empNumber)
+        {
+            return Ok(EmployeeBLL.RemoveEmployee(empNumber, updatedEmp));
         }
 
 

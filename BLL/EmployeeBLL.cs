@@ -36,6 +36,28 @@ namespace BLL
                 return EmployeeMapper.DALToDTO(emp);
             }
         }
+        public static object RemoveEmployee(int empNumber, EmployeeDTO updatedEmp)
+        {
+            using (EmployeesDBContext db = new EmployeesDBContext())
+            {
+                Employee oldEmp = db.Employee.FirstOrDefault(e => e.EmployeeNumber == empNumber);
+
+                List<HoursReport> hrs = db.HoursReport.Where(hr => hr.EmployeeNumber == empNumber).ToList();
+                foreach (var item in hrs)
+                {
+                    db.HoursReport.Remove(item);
+                    db.SaveChanges();
+                }
+                if (oldEmp != null)
+                {
+                    db.Employee.Remove(oldEmp);
+                    db.SaveChanges();
+                    return EmployeeMapper.DALToDTO(oldEmp);
+                };
+                return null;
+
+            }
+        }
 
         public static EmployeeDTO LoginEmployee(LoginEmployeeCardentials employeeCardentials)
         {
