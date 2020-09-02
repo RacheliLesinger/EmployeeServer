@@ -10,9 +10,9 @@ namespace DTO
     {
         public int Id { get; set; }
         public System.DateTime date { get; set; }
-        public Nullable<System.TimeSpan> timeStart { get; set; }
-        public Nullable<System.TimeSpan> timeEnd { get; set; }
-        public Nullable<int> dayReportType { get; set; }
+        public string timeStart { get; set; }
+        public string timeEnd { get; set; }
+        public int dayReportType { get; set; }
         public string comment { get; set; }
         public int employeeNumber { get; set; }
     }

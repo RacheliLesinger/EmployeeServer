@@ -18,11 +18,11 @@ namespace DTOMapper
             {
                 comment = hr.Comment,
                 date = hr.Date,
-                dayReportType = hr.DayReportType,
+                dayReportType = (int)hr.DayReportType,
                 employeeNumber = hr.EmployeeNumber,
                 Id = hr.Id,
-                timeEnd = hr.TimeEnd,
-                timeStart =hr.TimeStart
+                timeEnd = hr.TimeEnd.ToString(),
+                timeStart =hr.TimeStart.ToString()
             };
         }
         public static List<HoursReportDTO> DALsToDTOs(List<HoursReport> hrs)
@@ -42,8 +42,8 @@ namespace DTOMapper
                 DayReportType = hr.dayReportType,
                 EmployeeNumber = hr.employeeNumber,
                 Id = hr.Id,
-                TimeEnd = hr.timeEnd,
-                TimeStart = hr.timeStart
+                TimeEnd = TimeSpan.Parse(hr.timeEnd),
+                TimeStart = TimeSpan.Parse(hr.timeStart)
             };
         }
 
@@ -56,8 +56,8 @@ namespace DTOMapper
                 dayReportType = int.Parse(hr.dayReportType),
                 employeeNumber = hr.employeeNumber,
                 Id = hr.Id,
-                timeEnd = TimeSpan.Parse(hr.timeEnd),
-                timeStart = TimeSpan.Parse(hr.timeStart)
+                timeEnd = hr.timeEnd,
+                timeStart = hr.timeStart
             };
         }
     }
