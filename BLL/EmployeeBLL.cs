@@ -48,6 +48,12 @@ namespace BLL
                     db.HoursReport.Remove(item);
                     db.SaveChanges();
                 }
+                List<UploadedProfile> profile = db.UploadedProfile.Where(pr => pr.EmployeeNumber == empNumber).ToList();
+                foreach (var item in profile)
+                {
+                    db.UploadedProfile.Remove(item);
+                    db.SaveChanges();
+                }
                 if (oldEmp != null)
                 {
                     db.Employee.Remove(oldEmp);
