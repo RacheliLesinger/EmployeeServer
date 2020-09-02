@@ -89,9 +89,10 @@ namespace BLL
                     var hrStart = db.HoursReport.FirstOrDefault(hr => hr.EmployeeNumber == emp.EmployeeNumber
                                                         && hr.TimeStart != null && hr.TimeEnd == null);
 
+                    var t = DateTime.Now.TimeOfDay;
                     if (hrStart != null) 
                     {
-                        hrStart.TimeEnd = DateTime.Now.TimeOfDay;
+                        hrStart.TimeEnd = new TimeSpan(t.Hours, t.Minutes, 0);
                         db.HoursReport.Update(hrStart);
                     }
                     else
@@ -99,10 +100,10 @@ namespace BLL
                         var drt = db.DayReportType.FirstOrDefault(r => r.Value.Contains("מצלמה"));
                         HoursReport hr = new HoursReport()
                         {
-                            Date = DateTime.Now.Date,
-                            TimeStart = DateTime.Now.TimeOfDay,
-                            DayReportType = drt.Id,
-                            EmployeeNumber = emp.EmployeeNumber
+                           Date = DateTime.Now.Date,
+                           TimeStart = new TimeSpan(t.Hours, t.Minutes, 0),
+                           DayReportType = drt.Id,
+                           EmployeeNumber = emp.EmployeeNumber
                         };
                         db.HoursReport.Add(hr);
                     };
