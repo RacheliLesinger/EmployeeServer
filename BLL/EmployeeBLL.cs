@@ -89,7 +89,8 @@ namespace BLL
                     if (oldEmp.ImageUrl != emp.ImageUrl)
                         await UploadedProfileBLL.AddUploadedProfile(updatedEmp);
                     emp.DateAdded = oldEmp.DateAdded;
-                    db.Employee.Update(emp);
+                    db.Entry(db.Employee.FirstOrDefault(e => e.EmployeeNumber == empNumber)).CurrentValues.SetValues(emp);
+                    //db.Employee.Update(emp);
                     db.SaveChanges();
                     return EmployeeMapper.DALToDTO(emp);
                 }
